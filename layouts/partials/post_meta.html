@@ -18,6 +18,11 @@
 {{- end }}
 {{- end }}
 
+{{- $series := .Language.Params.Taxonomies.series | default "series" }}
+{{- range ($.GetTerms $series) }}
+{{- $scratch.Add "meta" (printf "<a href='%s'>%s</a>" .Permalink .LinkTitle) }}
+{{- end }}
+
 {{- with ($scratch.Get "meta") }}
 {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
 {{- end -}}
